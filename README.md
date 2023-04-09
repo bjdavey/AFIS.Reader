@@ -3,7 +3,9 @@
 
 NOTE: Works on **Microsoft Windows ONLY !!**
 
-**GetFingerPrintWSQ**: Use this method to read the fingerprint image from the device in WSQ format.
+1) Install AFIS.Reader.Service.Installer.msi from https://github.com/bjdavey/AFIS.Reader/releases/latest/download/AFIS.Reader.Service.Installer.msi
+
+2) **GetFingerPrintWSQ**: Use this method to read the fingerprint image from the device in WSQ format.
 
 •	URL  
 /AFIS/GetFingerPrintWSQ
