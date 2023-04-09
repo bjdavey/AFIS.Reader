@@ -1,25 +1,31 @@
 
-Fingerprint reader service for most of Futronic Fingerprint Scanners
+### Fingerprint reader service for most of Futronic Fingerprint Scanners
 
-NOTE: Works on Microsoft Windows ONLY !!
+NOTE: Works on **Microsoft Windows ONLY !!**
 
-GetFingerPrintWSQ
-Use this method to read the fingerprint image from the device in WSQ format.
-•	URL
+**GetFingerPrintWSQ**: Use this method to read the fingerprint image from the device in WSQ format.
+
+•	URL  
 /AFIS/GetFingerPrintWSQ
-•	Full URL
+
+•	Full URL  
 http://localhost:8000/AFIS/GetFingerPrintWSQ
-•	Method
+
+•	Method  
 GET
-•	Content-Type
+
+•	Content-Type  
 none
-•	URL Parameters
+
+•	URL Parameters  
 none
-•	Data Parameters
+
+•	Data Parameters  
 none 
-•	Response:
-Error: (Error Message | null)
-ErrorCode: (Error Code | null)
-InnerException: (Exception Details | null)
-Status: (true | false) *indicates if the request succeeded
+
+•	Response:  
+Error: (Error Message | null)  
+ErrorCode: (Error Code | null)  
+InnerException: (Exception Details | null)  
+Status: (true | false) *indicates if the request succeeded  
 WSQ:  (WSQ string of the first fingerprint image)
