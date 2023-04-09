@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="*" Name="AFIS.Reader.Service" Language="1033" Version="1.0.0.0" Manufacturer="BJ Davey" UpgradeCode="e3d8a492-0798-43d1-9e55-fe02d52a153d">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate EmbedCab="yes" />
+
+    <Feature Id="ProductFeature" Title="AFIS.Reader.Service.Installer" Level="1">
+      <ComponentGroupRef Id="LibsComponents" />
+      <ComponentGroupRef Id="ProductComponents" />
+    </Feature>
+
+  </Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="ManufacturerFolder" Name="!(bind.property.Manufacturer)">
+          <Directory Id="INSTALLFOLDER" Name="!(bind.property.ProductName)">
+            <Directory Id="LIBS" Name="Libs" />
+          </Directory>
+        </Directory>
+      </Directory>
+    </Directory>
+  </Fragment>
+
+  <Fragment>
+
+    <ComponentGroup Id="LibsComponents" Directory="LIBS">
+      <Component Id="LibsC" Guid="E8A58B7B-F031-4548-9BDD-7A6796C8460D">
+        <File Id="ftrMathAPI"
+          Source="$(var.AFIS.Reader.Service.TargetDir)\Libs\ftrMathAPI.dll"/>
+        <File Id="ftrScanAPI"
+          Source="$(var.AFIS.Reader.Service.TargetDir)\Libs\ftrScanAPI.dll"/>
+        <File Id="ftrWSQ"
+        Source="$(var.AFIS.Reader.Service.TargetDir)\Libs\ftrWSQ.dll"/>
+      </Component>
+    </ComponentGroup>
+
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      
+      <Component Id="Files" Guid="A74EDE5E-D690-45B1-82AD-C8A86C5CA104">
+        <File Id="FS88NET"
+        Source="$(var.AFIS.Reader.Service.TargetDir)\FS88NET.dll"/>
+      <File Id="Config"
+        Source="$(var.AFIS.Reader.Service.TargetDir)\AFIS.Reader.Service.exe.config"/>
+      </Component>
+
+      <Component Id="ProductComponent">
+
+        <File
+          Id="AFIS.Reader.Service"
+          Name="AFIS.Reader.Service.exe"
+          DiskId="1"
+          Source="$(var.AFIS.Reader.Service.TargetPath)"
+          Vital="yes"
+          KeyPath="yes" />
+
+
+
+        <ServiceInstall Id="ServiceInstaller" Type="ownProcess" Vital="yes"
+						Name="AFIS.Reader.Service" DisplayName="AFIS.Reader.Service"
+						Description="AFIS.Reader.Service" Start="auto"
+						Account="LocalSystem" ErrorControl="normal"
+            Arguments=" /start AFIS.Reader.Service"
+            Interactive="no" />
+
+        <ServiceControl Id="StartService"  Stop="both" Start="install" Remove="uninstall"
+						Name="AFIS.Reader.Service" Wait="yes" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>
